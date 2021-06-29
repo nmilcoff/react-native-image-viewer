@@ -591,6 +591,16 @@ export default class ImageViewer extends React.Component<Props, State> {
         <Animated.View style={{ ...this.styles.container, opacity: this.fadeAnim }}>
           {this!.props!.renderHeader!(this.state.currentShowIndex)}
 
+          <Animated.View
+            style={{
+              ...this.styles.moveBox,
+              transform: [{ translateX: this.positionX }],
+              width: this.width * this.props.imageUrls.length
+            }}
+          >
+            {ImageElements}
+          </Animated.View>
+          
           <View style={this.styles.arrowLeftContainer}>
             <TouchableWithoutFeedback onPress={this.goBack}>
               <View>{this!.props!.renderArrowLeft!()}</View>
@@ -603,15 +613,6 @@ export default class ImageViewer extends React.Component<Props, State> {
             </TouchableWithoutFeedback>
           </View>
 
-          <Animated.View
-            style={{
-              ...this.styles.moveBox,
-              transform: [{ translateX: this.positionX }],
-              width: this.width * this.props.imageUrls.length
-            }}
-          >
-            {ImageElements}
-          </Animated.View>
           {this!.props!.renderIndicator!((this.state.currentShowIndex || 0) + 1, this.props.imageUrls.length)}
 
           {this.props.imageUrls[this.state.currentShowIndex || 0] &&
